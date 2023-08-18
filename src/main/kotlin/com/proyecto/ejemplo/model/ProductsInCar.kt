@@ -3,7 +3,7 @@ package com.proyecto.ejemplo.model
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "productsInCar")
+@Table(name = "productsInCart")
 
 data class ProductsInCar (
     @Id
