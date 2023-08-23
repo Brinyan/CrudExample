@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*
 import com.proyecto.ejemplo.repositories.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 
+//Versionamiento
+//mapper / dto
+//optional
 @RestController
 class ProductController(@Autowired private val productRepository: ProductRepository) {
 

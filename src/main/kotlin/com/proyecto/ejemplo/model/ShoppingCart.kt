@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 data class ShoppingCart(
     @Id
     @GeneratedValue
-    val idCart: Long = 0,
+    val idCart: Int = 0,
     @Column
     val dateCreation: LocalDateTime = LocalDateTime.now()
 )

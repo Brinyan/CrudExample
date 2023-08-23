@@ -5,13 +5,13 @@ import jakarta.persistence.*
 @Entity
 @Table(name = "productsInCart")
 
-data class ProductsInCar (
+data class ProductsInCart (
     @Id
     @GeneratedValue
     val idShop : Int = 0,
 
     @ManyToOne
-    @JoinColumn(name = "shopping_id")
+    @JoinColumn(name = "shopping_cart_id")
     val shoppingCart: ShoppingCart,
 
     @ManyToOne
