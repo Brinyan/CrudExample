@@ -1,4 +1,4 @@
-package com.proyecto.ejemplo.controller
+package com.proyecto.ejemplo.controller.v1
 
 import com.proyecto.ejemplo.model.Product
 import org.springframework.http.HttpStatus
