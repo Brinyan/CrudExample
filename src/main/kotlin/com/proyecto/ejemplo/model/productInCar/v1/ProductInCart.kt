@@ -1,11 +1,13 @@
-package com.proyecto.ejemplo.model
+package com.proyecto.ejemplo.model.productInCar.v1
 
+import com.proyecto.ejemplo.model.shoppingCart.v1.ShoppingCart
+import com.proyecto.ejemplo.model.product.v1.Product
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "productsInCart")
+@Table(name = "products_in_cart")
 
-data class ProductsInCart (
+data class ProductInCart (
     @Id
     @GeneratedValue
     val idShop : Int = 0,

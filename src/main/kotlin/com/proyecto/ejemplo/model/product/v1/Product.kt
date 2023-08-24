@@ -1,4 +1,4 @@
-package com.proyecto.ejemplo.model
+package com.proyecto.ejemplo.model.product.v1
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -9,7 +9,7 @@ import jakarta.persistence.Table
 
 //Modelado DB
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 data class Product (
     @Id
     @GeneratedValue

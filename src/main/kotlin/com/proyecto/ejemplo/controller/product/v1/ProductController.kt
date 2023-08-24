@@ -1,16 +1,15 @@
-package com.proyecto.ejemplo.controller
+package com.proyecto.ejemplo.controller.product.v1
 
-import com.proyecto.ejemplo.model.Product
+import com.proyecto.ejemplo.model.product.v1.Product
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import com.proyecto.ejemplo.repositories.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 
-//Versionamiento
-//mapper / dto
-//optional
+
 @RestController
+@RequestMapping("/product")
 class ProductController(@Autowired private val productRepository: ProductRepository) {
 
     @PostMapping("/createProduct")

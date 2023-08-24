@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
 	id("org.springframework.boot") version "3.1.2"
@@ -6,6 +7,7 @@ plugins {
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
 	kotlin("plugin.jpa") version "1.8.22"
+	kotlin("kapt") version "1.6.21"
 }
 
 group = "com.proyecto"
@@ -27,6 +29,8 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	api("org.mapstruct:mapstruct:1.4.1.Final")
+	kapt("org.mapstruct:mapstruct-processor:1.4.1.Final")
 }
 
 tasks.withType<KotlinCompile> {

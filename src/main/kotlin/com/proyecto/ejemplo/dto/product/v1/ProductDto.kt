@@ -1,4 +1,4 @@
-package com.proyecto.ejemplo.dto
+package com.proyecto.ejemplo.dto.product.v1
 
 class ProductDto (
     val idProduct: Int? = null,

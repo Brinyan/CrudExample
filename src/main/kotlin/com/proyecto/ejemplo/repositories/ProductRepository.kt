@@ -1,8 +1,9 @@
 package com.proyecto.ejemplo.repositories
 
-import com.proyecto.ejemplo.model.Product
+import com.proyecto.ejemplo.model.product.v1.Product
 import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
 
-//Conexión de DB
+@Repository
 interface ProductRepository : CrudRepository<Product, Int> {
 }

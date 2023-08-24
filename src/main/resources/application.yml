@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:~/mcm/testbd
+    url: 'jdbc:h2:~/mcm/testbd;DB_CLOSE_ON_EXIT=FALSE'
     driverClassName: org.h2.Driver
   jpa:
     defer-datasource-initialization: true

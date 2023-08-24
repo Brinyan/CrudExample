@@ -1,17 +1,18 @@
 package com.proyecto.ejemplo.service
 
-import com.proyecto.ejemplo.dto.ProductsInCartDto
+import com.proyecto.ejemplo.dto.productInCart.v1.ProductInCartDto
+import java.util.UUID
 
 
 interface ProductService {
 
     fun addProductToCart(
-        cartId: Int,
+        cartId: UUID,
         productId: Int,
         quantity: Int
     )
 
     fun getProductsInCart(
-        cartId: Int
-    ) : List<ProductsInCartDto>
+        cartId: UUID
+    ) : List<ProductInCartDto>
 }

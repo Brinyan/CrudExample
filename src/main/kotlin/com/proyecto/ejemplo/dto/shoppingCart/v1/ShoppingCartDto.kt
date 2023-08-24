@@ -1,8 +1,9 @@
-package com.proyecto.ejemplo.dto
+package com.proyecto.ejemplo.dto.shoppingCart.v1
 
 import java.time.LocalDateTime
+import java.util.UUID
 
 class ShoppingCartDto(
-    val idCart: Int? = null,
+    val idCart: UUID,
     val dateCreation: LocalDateTime
 )
