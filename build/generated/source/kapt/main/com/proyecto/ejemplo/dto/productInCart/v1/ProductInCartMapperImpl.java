@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-08-24T11:46:17-0500",
+    date = "2023-08-24T15:11:41-0500",
     comments = "version: 1.4.1.Final, compiler: IncrementalProcessingEnvironment from kotlin-annotation-processing-gradle-1.8.22.jar, environment: Java 17.0.8 (Amazon.com Inc.)"
 )
 @Component
@@ -38,7 +38,7 @@ public class ProductInCartMapperImpl implements ProductInCartMapper {
         if ( productInCart.getShoppingCart() != null ) {
             shoppingCart = shoppingCartToShoppingCartDto( productInCart.getShoppingCart() );
         }
-        totalCost = productInCart.getTotalCost();
+        totalCost = (int) productInCart.getTotalCost();
         if ( productInCart.getProduct() != null ) {
             product = productMapper.toDto( productInCart.getProduct() );
         }

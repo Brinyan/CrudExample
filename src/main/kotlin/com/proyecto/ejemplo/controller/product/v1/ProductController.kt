@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import com.proyecto.ejemplo.service.product.ProductService
+import java.util.*
 
 /*
 Crear producto
@@ -18,7 +19,9 @@ Eliminar producto
 
 @RestController
 @RequestMapping("/v1/product")
-class ProductController(private val productService: ProductService) {
+class ProductController(
+    private val productService: ProductService
+) {
 
     @PostMapping("/create")
     fun createProduct(@RequestBody productRequest : ProductRequest): ResponseEntity<ProductDto> {
@@ -26,7 +29,22 @@ class ProductController(private val productService: ProductService) {
         return ResponseEntity(createdProduct, HttpStatus.CREATED)
     }
 
+    @GetMapping("/getProductById/{productId}")
+    fun getProductById(@PathVariable productId : UUID) : ResponseEntity<ProductDto>{
+        return ResponseEntity.ok().body(productService.getProductById(productId))
+    }
+
     /*
+        @GetMapping("/{uuid}")
+    fun show(@PathVariable uuid: UUID): ResponseEntity<ProductDto> {
+        return ResponseEntity.ok().body(productService.findByUuid(uuid))
+    }
+
+    @GetMapping("/{uuid}")
+    fun show(@PathVariable uuid: UUID): ResponseEntity<OrderDto> {
+        return ResponseEntity.ok().body(orderService.findByUuid(uuid))
+    }
+
     @PostMapping("/createProduct")
     fun createProduct(@RequestBody product: Product): ResponseEntity<Product> {
         val createdProduct = productRepository.save(product)

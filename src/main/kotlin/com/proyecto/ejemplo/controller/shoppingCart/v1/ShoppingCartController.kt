@@ -8,14 +8,12 @@ import java.util.UUID
 @RestController
 @RequestMapping("/v1/shoppingCart")
 class ShoppingCartController(private val productService: ProductService) {
-    @PostMapping("/addProduct/{shoppingCartId}/{productId}/{totalProducts}")
+   /* @PostMapping("/addProduct/{shoppingCartId}/{productId}/{totalProducts}")
     fun addProducts (
         @PathVariable shoppingCartId: UUID = UUID.randomUUID(),
         @PathVariable productId: Int,
         @PathVariable totalProducts: Int
         ) {
         productService.addProductToCart(shoppingCartId, productId, totalProducts)
+*/
     }
-
-
-}

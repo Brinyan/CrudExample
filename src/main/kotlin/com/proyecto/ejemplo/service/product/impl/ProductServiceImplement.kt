@@ -12,7 +12,10 @@ import com.proyecto.ejemplo.repositories.ProductRepository
 import com.proyecto.ejemplo.repositories.ProductInCartRepository
 import com.proyecto.ejemplo.repositories.ShoppingCartRepository
 import com.proyecto.ejemplo.service.product.ProductService
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.server.ResponseStatusException
 import java.util.UUID
 
 @Service
@@ -24,16 +27,17 @@ class ProductServiceImplement (
     private val productMapper: ProductMapper
     ) : ProductService {
 
-    override fun addProductToCart(cartId: UUID, productId: Int, quantity: Int) {
+    override fun addProductToCart(cartId: UUID, productId: UUID, quantity: Int, idShop : Int, totalCost : Long) {
         val shoppingCart = shoppingCartRepository.findById(cartId)
         val product = productRepository.findById(productId)
 
         if (shoppingCart.isPresent && product.isPresent) {
             val productInCart =
-                ProductInCart(shoppingCart = shoppingCart.get(), product = product.get(), totalProduct = quantity)
+                ProductInCart(shoppingCart = shoppingCart.get(), product = product.get(), totalProduct = quantity, idShop = idShop, totalCost = totalCost)
             productsInCartRepository.save(productInCart)
         }
     }
+
     override fun getProductsInCart(cartId: UUID): List<ProductInCartDto> {
         val cart = shoppingCartRepository.findById(cartId)
         val productInCart = productsInCartRepository.findByShoppingCartIdCart(cartId)
@@ -52,11 +56,20 @@ class ProductServiceImplement (
         return productMapper.toDto(savedProduct)
     }
 
+    override fun getProductById(productId: UUID): ProductDto {
+        val product = productRepository.findById(productId).orElseThrow{ throw ResponseStatusException(HttpStatus.NOT_FOUND)}
+        return productMapper.toDto(product)
+    }
+
     /*
-        @PostMapping("/createProduct")
-    fun createProduct(@RequestBody product: Product): ResponseEntity<Product> {
-        val createdProduct = productRepository.save(product)
-        return ResponseEntity(createdProduct, HttpStatus.CREATED)
+
+    @GetMapping("/getProductById/{id}")
+    fun getProductById(@PathVariable("id") productId: Int): ResponseEntity<Product> {
+        val product = productRepository.findById(productId).orElse(null)
+        return if (product != null) ResponseEntity(product, HttpStatus.OK)
+        else ResponseEntity(HttpStatus.NOT_FOUND)
     }
      */
+
+
 }

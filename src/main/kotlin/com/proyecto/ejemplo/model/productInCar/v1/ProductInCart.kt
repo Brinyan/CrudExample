@@ -9,8 +9,7 @@ import jakarta.persistence.*
 
 data class ProductInCart (
     @Id
-    @GeneratedValue
-    val idShop : Int = 0,
+    val idShop : Int,
 
     @ManyToOne
     @JoinColumn(name = "shopping_cart_id")
@@ -21,8 +20,8 @@ data class ProductInCart (
     val product: Product,
 
     @Column
-    val totalCost : Int = 0,
+    val totalCost : Long,
 
     @Column
-    val totalProduct: Int = 0
+    val totalProduct: Int
 )
