@@ -12,12 +12,11 @@ import jakarta.persistence.Table
 @Table(name = "products")
 data class Product (
     @Id
-    @GeneratedValue
-    val idProduct : Int = 0,
+    val idProduct : Int,
     @Column
-    val nameProduct : String = "",
+    val nameProduct : String,
     @Column
-    val skuProduct : Int = 0,
+    val skuProduct : Int,
     @Column
-    val priceProduct: Long = 0
+    val priceProduct: Long
 )

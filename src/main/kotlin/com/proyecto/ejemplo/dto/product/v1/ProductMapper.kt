@@ -12,8 +12,8 @@ import org.mapstruct.*
 )
 
 interface ProductMapper {
-
     @Mappings
     fun toDto (product: Product) : ProductDto
+    fun toEntity (productRequest: ProductRequest) : Product
 }
 

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:~/mcm/testbd
+    url: 'jdbc:h2:~/mcm/testbd;AUTO_SERVER=TRUE'
     driverClassName: org.h2.Driver
   jpa:
     defer-datasource-initialization: true
@@ -11,6 +11,11 @@ spring:
   h2:
     console:
       enabled : true
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      write_dates_as_timestamps: false
 
 server:
   port: 8085

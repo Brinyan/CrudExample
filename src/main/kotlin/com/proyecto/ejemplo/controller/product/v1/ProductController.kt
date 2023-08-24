@@ -1,17 +1,32 @@
 package com.proyecto.ejemplo.controller.product.v1
 
-import com.proyecto.ejemplo.model.product.v1.Product
+import com.proyecto.ejemplo.dto.product.v1.ProductDto
+import com.proyecto.ejemplo.dto.product.v1.ProductRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import com.proyecto.ejemplo.repositories.ProductRepository
-import org.springframework.beans.factory.annotation.Autowired
+import com.proyecto.ejemplo.service.product.ProductService
 
+/*
+Crear producto
+Actualizar producto
+Obtener producto mediante uuid
+Obtener productos
+Eliminar producto
+++Obtener producto mediante nombre
+ */
 
 @RestController
-@RequestMapping("/product")
-class ProductController(@Autowired private val productRepository: ProductRepository) {
+@RequestMapping("/v1/product")
+class ProductController(private val productService: ProductService) {
 
+    @PostMapping("/create")
+    fun createProduct(@RequestBody productRequest : ProductRequest): ResponseEntity<ProductDto> {
+        val createdProduct = productService.createProduct(productRequest)
+        return ResponseEntity(createdProduct, HttpStatus.CREATED)
+    }
+
+    /*
     @PostMapping("/createProduct")
     fun createProduct(@RequestBody product: Product): ResponseEntity<Product> {
         val createdProduct = productRepository.save(product)
@@ -48,5 +63,5 @@ class ProductController(@Autowired private val productRepository: ProductReposit
         productRepository.deleteById(productId)
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
-
+*/
 }
