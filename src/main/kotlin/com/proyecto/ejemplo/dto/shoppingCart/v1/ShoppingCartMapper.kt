@@ -14,4 +14,6 @@ import org.mapstruct.*
 interface ShoppingCartMapper {
     @Mappings
     fun toDto (shoppingCart: ShoppingCart) : ShoppingCartDto
+
+    fun toEntity (shoppingCartRequest: ShoppingCartRequest) : ShoppingCart
 }
