@@ -12,11 +12,13 @@ import com.proyecto.ejemplo.repositories.ProductRepository
 import com.proyecto.ejemplo.repositories.ProductInCartRepository
 import com.proyecto.ejemplo.repositories.ShoppingCartRepository
 import com.proyecto.ejemplo.service.product.ProductService
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.server.ResponseStatusException
 import java.util.UUID
+import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.domain.Specification
 
 @Service
 class ProductServiceImplement (
@@ -61,7 +63,21 @@ class ProductServiceImplement (
         return productMapper.toDto(product)
     }
 
+    override fun getAllProducts(pageable: Pageable): Page<ProductDto> {
+        val productsPage: Page<Product> = productRepository.findAll(pageable)
+        return productsPage.map { productMapper.toDto(it) }
+    }
+
+
     /*
+
+    override fun getAllProducts(page: Int, size: Int): Page<ProductDto> {
+        val pageable: Pageable = PageRequest.of(page, size)
+        val productsPage: Page<Product> = productRepository.findAll(pageable)
+        return productsPage.map { productMapper.toDto(it) }
+    }
+
+    productRepository.findAll().map { productMapper.toDto(it)
 
     @GetMapping("/getProductById/{id}")
     fun getProductById(@PathVariable("id") productId: Int): ResponseEntity<Product> {

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: 'jdbc:h2:~/mcm/carritoDB'
+    url: 'jdbc:h2:~/mcm/carritoDB;AUTO_SERVER=TRUE'
     driverClassName: org.h2.Driver
   jpa:
     defer-datasource-initialization: true
@@ -18,4 +18,4 @@ spring:
       write_dates_as_timestamps: false
 
 server:
-  port: 8085
+  port: 8080

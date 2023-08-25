@@ -31,6 +31,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	api("org.mapstruct:mapstruct:1.4.1.Final")
 	kapt("org.mapstruct:mapstruct-processor:1.4.1.Final")
+	implementation("com.sipios:spring-search:0.2.4")
 }
 
 tasks.withType<KotlinCompile> {
