@@ -1,24 +1,26 @@
 package com.proyecto.ejemplo.controller.productInCart.v1
 
 import com.proyecto.ejemplo.dto.productInCart.v1.ProductInCartDto
+import com.proyecto.ejemplo.dto.productInCart.v1.ProductInCartRequest
+import com.proyecto.ejemplo.dto.shoppingCart.v1.ShoppingCartDto
 import com.proyecto.ejemplo.service.product.ProductService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import com.proyecto.ejemplo.service.productInCart.ProductInCartService
+import com.proyecto.ejemplo.service.shoppingCart.ShoppingCartService
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 import java.util.*
+import kotlin.system.exitProcess
 
 @RestController
 @RequestMapping("/v1/productInCart")
 class ProductInCartController (
-    private val productService : ProductService
+    private val productInCartService: ProductInCartService
 ){
-    @GetMapping("/getProductsInCart/{cartId}")
-    fun getProductsInCart(
-        @PathVariable cartId: UUID
-    )
-            : List<ProductInCartDto> {
-        return productService.getProductsInCart(cartId)
+    @PostMapping("addProduct")
+    fun addProductToCart(
+        @RequestBody productInCartRequest: ProductInCartRequest
+    ): ResponseEntity<ProductInCartDto> {
+        val updatedCart = productInCartService.addProductToCart(productInCartRequest)
+        return ResponseEntity.ok(updatedCart)
     }
-
 }

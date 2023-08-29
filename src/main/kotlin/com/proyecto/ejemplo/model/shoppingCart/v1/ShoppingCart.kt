@@ -1,10 +1,8 @@
 package com.proyecto.ejemplo.model.shoppingCart.v1
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import com.proyecto.ejemplo.model.product.v1.Product
+import com.proyecto.ejemplo.model.productInCar.v1.ProductInCart
+import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -15,5 +13,7 @@ data class ShoppingCart(
     @Id
     val idCart: UUID = UUID.randomUUID(),
     @Column
-    val dateCreation: LocalDateTime = LocalDateTime.now()
+    val dateCreation: LocalDateTime = LocalDateTime.now(),
+    @OneToMany(mappedBy = "shoppingCart")
+    val products: MutableList<ProductInCart> = mutableListOf(),
 )

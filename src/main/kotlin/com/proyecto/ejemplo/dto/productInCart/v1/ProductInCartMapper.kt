@@ -1,6 +1,8 @@
 package com.proyecto.ejemplo.dto.productInCart.v1
 
 import com.proyecto.ejemplo.dto.product.v1.ProductMapper
+import com.proyecto.ejemplo.dto.product.v1.ProductRequest
+import com.proyecto.ejemplo.model.product.v1.Product
 import com.proyecto.ejemplo.model.productInCar.v1.ProductInCart
 import com.proyecto.ejemplo.model.shoppingCart.v1.ShoppingCart
 import org.mapstruct.*
@@ -17,5 +19,5 @@ import org.mapstruct.*
 interface ProductInCartMapper {
     @Mappings
     fun toDto (productInCart: ProductInCart) : ProductInCartDto
-
+    fun toEntity (productInCartRequest: ProductInCartRequest) : ProductInCart
 }

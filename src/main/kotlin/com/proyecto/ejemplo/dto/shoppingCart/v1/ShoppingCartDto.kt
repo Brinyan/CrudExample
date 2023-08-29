@@ -4,6 +4,5 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 class ShoppingCartDto(
-    val idCart: UUID,
-    val dateCreation: LocalDateTime
+    val idCart: UUID
 )

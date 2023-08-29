@@ -11,8 +11,6 @@ import java.util.UUID
 
 
 interface ProductService {
-    fun addProductToCart(cartId: UUID, productId: UUID, quantity: Int, idShop : Int, totalCost : Long)
-    fun getProductsInCart(cartId: UUID) : List<ProductInCartDto>
     fun createProduct(productRequest: ProductRequest): ProductDto
     fun getProductById(productId: UUID): ProductDto
     fun getAllProducts(pageable: Pageable): Page<ProductDto>

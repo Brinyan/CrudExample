@@ -48,31 +48,7 @@ class ProductController(
         return ResponseEntity.ok(productsPage)
     }
 
-
     /*
-        @GetMapping("/{uuid}")
-    fun show(@PathVariable uuid: UUID): ResponseEntity<ProductDto> {
-        return ResponseEntity.ok().body(productService.findByUuid(uuid))
-    }
-
-    @GetMapping("/{uuid}")
-    fun show(@PathVariable uuid: UUID): ResponseEntity<OrderDto> {
-        return ResponseEntity.ok().body(orderService.findByUuid(uuid))
-    }
-
-    @PostMapping("/createProduct")
-    fun createProduct(@RequestBody product: Product): ResponseEntity<Product> {
-        val createdProduct = productRepository.save(product)
-        return ResponseEntity(createdProduct, HttpStatus.CREATED)
-    }
-
-    @GetMapping("/getProductById/{id}")
-    fun getProductById(@PathVariable("id") productId: Int): ResponseEntity<Product> {
-        val product = productRepository.findById(productId).orElse(null)
-        return if (product != null) ResponseEntity(product, HttpStatus.OK)
-        else ResponseEntity(HttpStatus.NOT_FOUND)
-    }
-
     @GetMapping("/getAllProducts")
     fun getAllProducts(): List<Product> =
         productRepository.findAll().toList()
