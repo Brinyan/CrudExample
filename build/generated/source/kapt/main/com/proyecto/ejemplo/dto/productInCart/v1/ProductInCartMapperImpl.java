@@ -3,7 +3,6 @@ package com.proyecto.ejemplo.dto.productInCart.v1;
 import com.proyecto.ejemplo.dto.product.v1.ProductDto;
 import com.proyecto.ejemplo.dto.product.v1.ProductMapper;
 import com.proyecto.ejemplo.dto.shoppingCart.v1.ShoppingCartDto;
-import com.proyecto.ejemplo.model.product.v1.Product;
 import com.proyecto.ejemplo.model.productInCar.v1.ProductInCart;
 import com.proyecto.ejemplo.model.shoppingCart.v1.ShoppingCart;
 import java.util.UUID;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-08-29T10:57:04-0500",
+    date = "2023-08-30T14:52:09-0500",
     comments = "version: 1.4.1.Final, compiler: IncrementalProcessingEnvironment from kotlin-annotation-processing-gradle-1.8.22.jar, environment: Java 17.0.8 (Amazon.com Inc.)"
 )
 @Component
@@ -51,17 +50,9 @@ public class ProductInCartMapperImpl implements ProductInCartMapper {
             return null;
         }
 
-        int quantity = 0;
+        ProductInCart productInCart = new ProductInCart();
 
-        quantity = productInCartRequest.getQuantity();
-
-        int idShop = 0;
-        ShoppingCart shoppingCart = null;
-        Product product = null;
-        long totalCost = 0L;
-        int totalProduct = 0;
-
-        ProductInCart productInCart = new ProductInCart( idShop, shoppingCart, product, totalCost, totalProduct, quantity );
+        productInCart.setQuantity( productInCartRequest.getQuantity() );
 
         return productInCart;
     }

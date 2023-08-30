@@ -8,9 +8,12 @@ import com.proyecto.ejemplo.repositories.ProductInCartRepository
 import com.proyecto.ejemplo.repositories.ProductRepository
 import com.proyecto.ejemplo.repositories.ShoppingCartRepository
 import com.proyecto.ejemplo.service.productInCart.ProductInCartService
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
+import java.util.*
 
 
 @Service
@@ -57,6 +60,35 @@ class ProductInCartServiceImpl (
 
             val productUpdate = productInCartRepository.save(productExist)
             return productInCartMapper.toDto(productUpdate)
+        }
+    }
+
+    override fun deleteProductInCart(productInCartRequest: ProductInCartRequest) {
+        val cartId = productInCartRequest.idCart
+        val productId = productInCartRequest.productId
+
+        val optionalProductInCart = productInCartRepository.findByProductIdProductAndShoppingCartIdCart(productId,cartId)
+
+        if (optionalProductInCart.isPresent) {
+            productInCartRepository.deleteById(optionalProductInCart.get().idShop)
+        }else {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND,"Producto no se encuentra en carrito")
+        }
+    }
+
+    override fun updateProductQuantity(productInCartRequest: ProductInCartRequest): ProductInCartDto {
+        val cartId = productInCartRequest.idCart
+        val productId = productInCartRequest.productId
+        val quantityC = productInCartRequest.quantity
+        val optionalProductInCart = productInCartRepository.findByProductIdProductAndShoppingCartIdCart(productId,cartId)
+
+        if (optionalProductInCart.isPresent) {
+            val chQuantity = optionalProductInCart.get()
+            chQuantity.quantity = quantityC
+            val saveQuantity = productInCartRepository.save(chQuantity)
+            return productInCartMapper.toDto(saveQuantity)
+        } else {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado en carrito")
         }
     }
 }
