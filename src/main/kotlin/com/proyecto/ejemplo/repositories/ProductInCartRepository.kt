@@ -8,6 +8,6 @@ import java.util.Optional
 import java.util.UUID
 
 @Repository
-interface ProductInCartRepository : JpaRepository<ProductInCart,Int> {
+interface ProductInCartRepository : JpaRepository<ProductInCart,UUID> {
     fun findByProductIdProductAndShoppingCartIdCart(idProduct : UUID, idCart : UUID) : Optional<ProductInCart>
 }

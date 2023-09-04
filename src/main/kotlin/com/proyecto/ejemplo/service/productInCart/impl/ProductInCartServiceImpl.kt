@@ -46,20 +46,35 @@ class ProductInCartServiceImpl (
                 break
             }
         }
-
-        if (productExist == null) {
+        return if (productExist == null) {
 
             addProduct.shoppingCart = cartI
             addProduct.product = productI
+            val totalPrice = quantityP * (addProduct.product?.priceProduct ?: 0)
+            addProduct.totalCost = totalPrice
+
+            val totalProduct = cartI.products.sumOf { it.quantity }.plus(quantityP)
+            val totalPriceT = cartI.products.sumOf { it.totalCost }.plus(totalPrice)
+
+            cartI.totalProducts = totalProduct
+            cartI.totalPrice = totalPriceT
+            shoppingCartRepository.save(cartI)
 
             val saveProductInCart = productInCartRepository.save(addProduct)
+            productInCartMapper.toDto(saveProductInCart)
 
-            return productInCartMapper.toDto(saveProductInCart)
         } else {
+
+            val totalPrice = quantityP * (productExist.product?.priceProduct ?: 0)
+
             productExist.quantity = quantityP
+            productExist.totalCost = totalPrice
+            cartI.totalPrice = cartI.products.sumOf { it.totalCost }
+            cartI.totalProducts = cartI.products.sumOf { it.quantity }
+            shoppingCartRepository.save(cartI)
 
             val productUpdate = productInCartRepository.save(productExist)
-            return productInCartMapper.toDto(productUpdate)
+            productInCartMapper.toDto(productUpdate)
         }
     }
 
@@ -70,7 +85,7 @@ class ProductInCartServiceImpl (
         val optionalProductInCart = productInCartRepository.findByProductIdProductAndShoppingCartIdCart(productId,cartId)
 
         if (optionalProductInCart.isPresent) {
-            productInCartRepository.deleteById(optionalProductInCart.get().idShop)
+            optionalProductInCart.get().idShop.let { productInCartRepository.deleteById(it) }
         }else {
             throw ResponseStatusException(HttpStatus.NOT_FOUND,"Producto no se encuentra en carrito")
         }
@@ -83,10 +98,11 @@ class ProductInCartServiceImpl (
         val optionalProductInCart = productInCartRepository.findByProductIdProductAndShoppingCartIdCart(productId,cartId)
 
         if (optionalProductInCart.isPresent) {
-            val chQuantity = optionalProductInCart.get()
-            chQuantity.quantity = quantityC
-            val saveQuantity = productInCartRepository.save(chQuantity)
-            return productInCartMapper.toDto(saveQuantity)
+            val chProduct = optionalProductInCart.get()
+            chProduct.quantity = quantityC
+            chProduct.totalCost = quantityC * chProduct.product?.priceProduct!!
+            val saveProduct = productInCartRepository.save(chProduct)
+            return productInCartMapper.toDto(saveProduct)
         } else {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado en carrito")
         }

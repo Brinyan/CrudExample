@@ -10,5 +10,6 @@ import java.util.UUID
 class ProductInCartRequest (
         val idCart : UUID,
         val productId: UUID,
-        var quantity : Int
+        var quantity : Int,
+        //var idShop : UUID
 )

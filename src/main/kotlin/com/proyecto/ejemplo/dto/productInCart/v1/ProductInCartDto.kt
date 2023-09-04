@@ -9,9 +9,11 @@ import jakarta.persistence.Column
 
 
 class ProductInCartDto (
-    val shoppingCart: ShoppingCartDto,
+    //val shoppingCart: ShoppingCartDto,
     val product: ProductDto,
-    val quantity : Int
+    val quantity : Int,
+    val totalCost : Long?,
+    //val totalProduct: Int
 
     /*val Product
     val totalCost : Long,

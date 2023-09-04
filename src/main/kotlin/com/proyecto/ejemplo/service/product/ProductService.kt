@@ -2,6 +2,7 @@ package com.proyecto.ejemplo.service.product
 
 import com.proyecto.ejemplo.dto.product.v1.ProductDto
 import com.proyecto.ejemplo.dto.product.v1.ProductRequest
+import com.proyecto.ejemplo.dto.product.v1.ProductUpdateRequest
 import com.proyecto.ejemplo.dto.productInCart.v1.ProductInCartDto
 import com.proyecto.ejemplo.model.product.v1.Product
 import org.springframework.data.domain.Page
@@ -14,4 +15,5 @@ interface ProductService {
     fun createProduct(productRequest: ProductRequest): ProductDto
     fun getProductById(productId: UUID): ProductDto
     fun getAllProducts(pageable: Pageable): Page<ProductDto>
+    fun updateProduct(idProduct : UUID, productUpdateRequest: ProductUpdateRequest): ProductDto
 }

@@ -15,5 +15,5 @@ interface ProductMapper {
     @Mappings
     fun toDto (product: Product) : ProductDto
     fun toEntity (productRequest: ProductRequest) : Product
+    fun updateProduct(productUpdateRequest: ProductUpdateRequest, @MappingTarget product: Product)
 }
-

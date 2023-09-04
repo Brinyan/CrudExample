@@ -2,6 +2,9 @@ package com.proyecto.ejemplo.controller.product.v1
 
 import com.proyecto.ejemplo.dto.product.v1.ProductDto
 import com.proyecto.ejemplo.dto.product.v1.ProductRequest
+import com.proyecto.ejemplo.dto.product.v1.ProductUpdateRequest
+import com.proyecto.ejemplo.dto.productInCart.v1.ProductInCartDto
+import com.proyecto.ejemplo.dto.productInCart.v1.ProductInCartRequest
 import com.proyecto.ejemplo.model.product.v1.Product
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -47,30 +50,13 @@ class ProductController(
         val productsPage = productService.getAllProducts(pageable)
         return ResponseEntity.ok(productsPage)
     }
-
-    /*
-    @GetMapping("/getAllProducts")
-    fun getAllProducts(): List<Product> =
-        productRepository.findAll().toList()
-
-    @PutMapping("/updateProduct/{id}")
-    fun updateProductById(@PathVariable("id") productId: Int, @RequestBody product: Product): ResponseEntity<Product> {
-
-        val existingProduct = productRepository.findById(productId).orElse(null)
-            ?: return ResponseEntity(HttpStatus.NOT_FOUND)
-
-        val updatedProduct = existingProduct.copy(idProduct = product.idProduct, nameProduct = product.nameProduct, skuProduct =  product.skuProduct, priceProduct = product.priceProduct )
-        productRepository.save(updatedProduct)
-        return ResponseEntity(updatedProduct, HttpStatus.OK)
+    //ACTULIZAR NOMBRE Y SKU
+    @PatchMapping("{idProduct}/updateProduct")
+    fun updateProduct(
+            @PathVariable idProduct : UUID,
+            @RequestBody productUpdateRequest: ProductUpdateRequest,
+    ): ResponseEntity<ProductDto> {
+        val updatedProduct = productService.updateProduct(idProduct, productUpdateRequest)
+        return ResponseEntity.ok(updatedProduct)
     }
-
-    @DeleteMapping("deleteProduct/{id}")
-    fun deleteProductById(@PathVariable("id") productId: Int): ResponseEntity<Product> {
-        if (!productRepository.existsById(productId)) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-        productRepository.deleteById(productId)
-        return ResponseEntity(HttpStatus.NO_CONTENT)
-    }
-*/
 }

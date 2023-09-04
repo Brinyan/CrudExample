@@ -10,6 +10,4 @@ interface ProductInCartService {
     fun addProductToCart(productInCartRequest: ProductInCartRequest): ProductInCartDto
     fun deleteProductInCart(productInCartRequest: ProductInCartRequest)
     fun updateProductQuantity(productInCartRequest: ProductInCartRequest): ProductInCartDto
-
-    //actualizar cantidad de producto en el carrito (patch)
 }

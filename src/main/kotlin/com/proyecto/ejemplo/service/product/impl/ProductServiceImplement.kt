@@ -4,6 +4,7 @@ package com.proyecto.ejemplo.service.product.impl
 import com.proyecto.ejemplo.dto.product.v1.ProductDto
 import com.proyecto.ejemplo.dto.product.v1.ProductMapper
 import com.proyecto.ejemplo.dto.product.v1.ProductRequest
+import com.proyecto.ejemplo.dto.product.v1.ProductUpdateRequest
 import com.proyecto.ejemplo.model.product.v1.Product
 import com.proyecto.ejemplo.repositories.ProductRepository
 import com.proyecto.ejemplo.service.product.ProductService
@@ -36,4 +37,18 @@ class ProductServiceImplement (
         return productsPage.map { productMapper.toDto(it) }
     }
 
+    override fun updateProduct(idProduct: UUID, productUpdateRequest: ProductUpdateRequest): ProductDto {
+//ACTULIZAR NOMBRE Y SKU
+
+        val optionalProduct = productRepository.findById(idProduct)
+
+        if (optionalProduct.isPresent) {
+            val producto = optionalProduct.get()
+            productMapper.updateProduct(productUpdateRequest,producto)
+            val saveChangesProduct = productRepository.save(producto)
+            return productMapper.toDto(saveChangesProduct)
+        } else {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado.")
+        }
+    }
 }

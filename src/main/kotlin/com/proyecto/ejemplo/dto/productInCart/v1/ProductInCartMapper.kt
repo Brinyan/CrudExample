@@ -13,11 +13,12 @@ import org.mapstruct.*
     unmappedTargetPolicy = ReportingPolicy.IGNORE,
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
     collectionMappingStrategy = CollectionMappingStrategy.SETTER_PREFERRED,
-    uses = [ProductMapper::class, ShoppingCart::class]
+    uses = [ProductMapper::class]
 )
 
 interface ProductInCartMapper {
     @Mappings
     fun toDto (productInCart: ProductInCart) : ProductInCartDto
+    @Mappings
     fun toEntity (productInCartRequest: ProductInCartRequest) : ProductInCart
 }

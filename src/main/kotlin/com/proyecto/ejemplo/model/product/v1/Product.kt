@@ -12,12 +12,13 @@ import java.util.UUID
 @Entity
 @Table(name = "products")
 data class Product (
+    @Column
+    var nameProduct : String,
+    @Column
+    var skuProduct : Int,
+    @Column
+    var priceProduct: Long?
+){
     @Id
-    val idProduct : UUID,
-    @Column
-    val nameProduct : String,
-    @Column
-    val skuProduct : Int,
-    @Column
-    val priceProduct: Long
-)
+    val idProduct : UUID = UUID.randomUUID()
+}

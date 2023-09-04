@@ -4,5 +4,5 @@ import java.time.LocalDateTime
 import java.util.*
 
 class ShoppingCartRequest(
-    val idCart: UUID
+    val idCart: UUID = UUID.randomUUID()
 )
